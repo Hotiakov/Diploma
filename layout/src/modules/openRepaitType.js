@@ -12,18 +12,6 @@ const openRepaitType = () => {
             popup.style.visibility = "inherit";
         });
     });
-
-    closeBtn.addEventListener('click', () => {
-        popup.style.visibility = "hidden";
-    });
-
-    popup.addEventListener('click', e => {
-        if(e.target === popup){
-            popup.style.visibility = "hidden";
-        }
-    });
-
-
 };
 
 export default openRepaitType;

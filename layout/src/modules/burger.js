@@ -9,12 +9,10 @@ const burger = () =>{
         menu.classList.add('active');
     });
     closeBtn.addEventListener('click', () => {
-        popupMenu.style.visibility = "hidden";
         menu.classList.remove('active');
     });
     popupMenu.addEventListener('click', e => {
         if(e.target === popupMenu){
-            popupMenu.style.visibility = "hidden";
             menu.classList.remove('active');
         }
     })    
