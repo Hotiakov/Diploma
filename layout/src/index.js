@@ -1,3 +1,19 @@
-import calc from './modules/something';
+import phoneDropdown from './modules/phoneDropdown';
 
-calc(5, 15);
+document.addEventListener('DOMContentLoaded', () => {
+    //выпадающее меню телефона
+    phoneDropdown();
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
