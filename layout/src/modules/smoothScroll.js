@@ -7,7 +7,7 @@ const smoothScroll = () =>{
             return;
         }
         e.preventDefault();
-        menu.classList.remove('.active');
+        menu.classList.remove('active');
         let href = e.target.getAttribute('href').substring(1);
         const scrollTarget = document.getElementById(href);
         const topOffset = 0; // если не нужен отступ сверху 
