@@ -7,6 +7,7 @@ import openPrivacy from './modules/privacy';
 import help from './modules/help';
 import accordion from './modules/FAQ';
 import popupClose from './modules/popupClose';
+import openConsultPopup from './modules/consultation';
 
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
@@ -28,5 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     accordion();
     //Функция закрытия всех popup-окон
     popupClose();
+    //Открытие окна Консультации
+    openConsultPopup();
 
 });
