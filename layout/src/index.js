@@ -3,6 +3,8 @@ import burger from './modules/burger';
 import smoothScroll from './modules/smoothScroll';
 import openRepaitType from './modules/openRepaitType';
 
+import openPrivacy from './modules/privacy';
+
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
     //выпадающее меню телефона
@@ -13,5 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     smoothScroll();
     //Полный список услуг и цен
     openRepaitType();
+
+
+    //политика конфедициальности
+    openPrivacy();
 
 });
