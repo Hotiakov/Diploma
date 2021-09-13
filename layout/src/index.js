@@ -2,7 +2,7 @@ import phoneDropdown from './modules/phoneDropdown';
 import burger from './modules/burger';
 import smoothScroll from './modules/smoothScroll';
 import openRepaitType from './modules/openRepaitType';
-
+import phoneMask from './modules/phoneMask';
 import openPrivacy from './modules/privacy';
 import help from './modules/help';
 import accordion from './modules/FAQ';
@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     smoothScroll();
     //Полный список услуг и цен
     openRepaitType();
-
-
+    //Маска номера телефона
+    phoneMask("[name='phone']");
     //политика конфедициальности
     openPrivacy();
     //всплывающая подсказка
