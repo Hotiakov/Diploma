@@ -5,6 +5,7 @@ import openRepaitType from './modules/openRepaitType';
 
 import openPrivacy from './modules/privacy';
 import help from './modules/help';
+import accordion from './modules/FAQ';
 
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
@@ -22,5 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openPrivacy();
     //всплывающая подсказка
     help();
+    //Аккордион в FAQ
+    accordion();
 
 });
