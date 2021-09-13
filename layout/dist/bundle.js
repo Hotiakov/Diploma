@@ -49,7 +49,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar burger = function burger() {\n  var burberBtn = document.querySelector(\".menu__icon\"),\n      menu = document.querySelector(\".popup-dialog-menu\"),\n      closeBtn = menu.querySelector(\".close-menu\");\n  burberBtn.addEventListener('click', function () {\n    menu.classList.add('active');\n  });\n  closeBtn.addEventListener('click', function () {\n    menu.classList.remove('active');\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (burger);\n\n//# sourceURL=webpack://Diploma/./src/modules/burger.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar burger = function burger() {\n  var burberBtn = document.querySelector(\".menu__icon\"),\n      menu = document.querySelector(\".popup-dialog-menu\"),\n      closeBtn = menu.querySelector(\".close-menu\"),\n      popupMenu = document.querySelector(\".popup-menu\");\n  burberBtn.addEventListener('click', function () {\n    popupMenu.style.visibility = \"inherit\";\n    menu.classList.add('active');\n  });\n  closeBtn.addEventListener('click', function () {\n    popupMenu.style.visibility = \"hidden\";\n    menu.classList.remove('active');\n  });\n  popupMenu.addEventListener('click', function (e) {\n    if (e.target === popupMenu) {\n      popupMenu.style.visibility = \"hidden\";\n      menu.classList.remove('active');\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (burger);\n\n//# sourceURL=webpack://Diploma/./src/modules/burger.js?");
 
 /***/ }),
 
@@ -451,7 +451,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("9e51b68bbc076b8ae932")
+/******/ 		__webpack_require__.h = () => ("acc25cefa890a36ccdbc")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
