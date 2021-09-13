@@ -1,3 +1,12 @@
 .popup-dialog-menu.active {
   transform: translate3d(0, 0, 0);
 }
+
+.formula-item-popup.reverse {
+  top: 90px;
+  padding: 40px 40px 0;
+}
+
+.formula-item-popup.reverse::before {
+  transform: rotate(180deg);
+}

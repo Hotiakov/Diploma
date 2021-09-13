@@ -4,6 +4,7 @@ import smoothScroll from './modules/smoothScroll';
 import openRepaitType from './modules/openRepaitType';
 
 import openPrivacy from './modules/privacy';
+import help from './modules/help';
 
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
@@ -19,5 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //политика конфедициальности
     openPrivacy();
+    //всплывающая подсказка
+    help();
 
 });
