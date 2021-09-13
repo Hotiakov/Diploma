@@ -1,3 +1,8 @@
 import calc from './modules/something';
 
-calc(5, 15);
+document.addEventListener('DOMContentLoaded', () => {
+
+
+
+
+});
