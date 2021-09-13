@@ -1,3 +1,9 @@
-import calc from './modules/something';
+import burger from './modules/burger';
 
-calc(5, 15);
+document.addEventListener('DOMContentLoaded', ()=>{
+    //Бургер-меню
+    burger();
+
+
+
+});
