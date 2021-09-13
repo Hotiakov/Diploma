@@ -38,18 +38,18 @@ eval("\nmodule.exports = function () {\n\treturn /[\\u001b\\u009b][[()#;?]*(?:[0
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_something__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/something */ \"./src/modules/something.js\");\n\n(0,_modules_something__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(5, 15);\n\n//# sourceURL=webpack://Diploma/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_phoneDropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/phoneDropdown */ \"./src/modules/phoneDropdown.js\");\n\ndocument.addEventListener('DOMContentLoaded', function () {\n  //выпадающее меню телефона\n  (0,_modules_phoneDropdown__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n});\n\n//# sourceURL=webpack://Diploma/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/modules/something.js":
-/*!**********************************!*\
-  !*** ./src/modules/something.js ***!
-  \**********************************/
+/***/ "./src/modules/phoneDropdown.js":
+/*!**************************************!*\
+  !*** ./src/modules/phoneDropdown.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar calc = function calc(a, b) {\n  console.log(a + b);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (calc);\n\n//# sourceURL=webpack://Diploma/./src/modules/something.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar phoneDropdown = function phoneDropdown() {\n  var accordWrapper = document.querySelector('.header-contacts__phone-number-accord'),\n      dropBtn = document.querySelector('.header-contacts__arrow'),\n      accordPhone = accordWrapper.querySelector('.header-contacts__phone-number');\n  var flag = true;\n  dropBtn.addEventListener('click', function () {\n    if (flag) {\n      accordWrapper.style.top = \"25px\";\n      accordPhone.style.opacity = 1;\n      dropBtn.style.transform = \"rotate(-180deg)\";\n    } else {\n      accordWrapper.style.top = \"0\";\n      accordPhone.style.opacity = 0;\n      dropBtn.style.transform = \"rotate(0deg)\";\n    }\n\n    flag = !flag;\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (phoneDropdown);\n\n//# sourceURL=webpack://Diploma/./src/modules/phoneDropdown.js?");
 
 /***/ }),
 
@@ -451,7 +451,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("6b8864cd7b7c249c8136")
+/******/ 		__webpack_require__.h = () => ("77b0682a0a902eb81a15")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
