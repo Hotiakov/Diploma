@@ -1,11 +1,12 @@
 class Carousel {
-    constructor({ main, wrap, position = 0, next, prev, slidesToShow = 3, infinity = false, responsive = [] }) {
+    constructor({ main, wrap, position = 0, next, prev, slidesToShow = 3, infinity = false, hideArrow = false, responsive = [] }) {
         this.main = document.querySelector(main);
         this.wrap = document.querySelector(wrap);
         this.next = document.querySelector(next);
         this.prev = document.querySelector(prev);
         this.slides = this.wrap.children;
         this.slidesToShow = slidesToShow;
+        this.hideArrow = hideArrow;
         this.options = {
             position,
             widthSlide: Math.floor(100 / this.slidesToShow),
@@ -36,6 +37,9 @@ class Carousel {
         } else {
             this.addArrow();
             this.controlSlider();
+        }
+        if(this.options.position === 0 && this.hideArrow){
+            this.prev.style.display = "none";
         }
         if (this.responsive)
             this.responseInit();
@@ -92,20 +96,28 @@ class Carousel {
     }
     prevSlider() {
         if (this.options.infinity || this.options.position > 0) {
+            this.next.style.display = "flex";
             this.options.position--;
             if (this.options.infinity && this.options.position < 0) {
                 this.options.position = this.options.maxPosition;
             }
             this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
         }
+        if(this.hideArrow && this.options.position === 0){
+            this.prev.style.display = "none";
+        }
     }
     nextSlider() {
         if (this.options.infinity || this.options.position < this.options.maxPosition) {
+            this.prev.style.display = "flex";
             this.options.position++;
             if (this.options.infinity && this.options.position > this.options.maxPosition) {
                 this.options.position = 0;
             }
             this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+        }
+        if(this.hideArrow && this.options.position === this.options.maxPosition){
+            this.next.style.display = "none";
         }
     }
     addArrow() {
