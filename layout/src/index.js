@@ -11,6 +11,7 @@ import openConsultPopup from './modules/consultation';
 
 import makeRequest from './modules/makeRequest';
 import repairTabs from './modules/repairTabs';
+import sendForm from './modules/sendForm';
 
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
@@ -36,4 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     openConsultPopup();
     //Подгрузка данных и установка табов в repair-tabs
     repairTabs(); 
+    //Отправка форм
+    sendForm();
 });
