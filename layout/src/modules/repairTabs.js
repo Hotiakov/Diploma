@@ -37,7 +37,6 @@ const repairTabs = async () => {
 
     const activateTabs = () => {
         navList.addEventListener('click', e => {
-            console.log(e);
             if(e.target.tagName === "BUTTON"){
                 let type = e.target.textContent;
                 const curActive =  tableWrapper.querySelector('.active');
