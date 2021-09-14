@@ -9,6 +9,8 @@ import accordion from './modules/FAQ';
 import popupClose from './modules/popupClose';
 import openConsultPopup from './modules/consultation';
 
+import makeRequest from './modules/makeRequest';
+
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
     //выпадающее меню телефона
@@ -31,5 +33,4 @@ document.addEventListener('DOMContentLoaded', () => {
     popupClose();
     //Открытие окна Консультации
     openConsultPopup();
-
 });
