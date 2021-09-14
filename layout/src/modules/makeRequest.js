@@ -2,6 +2,7 @@ const makeRequest = (typeOfReq, distination, body) =>{
     if(typeOfReq === "GET"){
         return fetch(distination);
     } else {
+        document.body.classList.add('loaded');
         return fetch(distination, {
             method: 'POST',
             headers: {

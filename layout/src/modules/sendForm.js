@@ -28,12 +28,13 @@ const sendForm = () => {
                 formData.forEach((value, key) => data[key] = value);
             makeRequest("POST", './server.php', data)
                 .then(() => {
+                    document.body.classList.remove('loaded');
                     popupForm.style.visibility = "hidden";
                     popupThank.style.visibility = "inherit";
                     form.reset();
                     checkboxLabel.style.borderColor = 'black';
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => {console.error(err); document.body.classList.remove('loaded');});
         });
     });
 
