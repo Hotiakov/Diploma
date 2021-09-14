@@ -13,7 +13,29 @@ const addSliders = () => {
     });
     feedback.init();
 
-
+    const formula = new Carousel({
+        main: ".formula-slider-wrap",
+        wrap: ".formula-slider",
+        prev: "#formula-arrow_left",
+        next: "#formula-arrow_right",
+        hideArrow: true,
+        position: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                slidesToShow: 3,
+            },
+            {
+                breakpoint: 768,
+                slidesToShow: 2
+            },
+            {
+                breakpoint: 567,
+                slidesToShow: 1
+            },
+        ]
+    });
+    formula.init();
 };
 
 export default addSliders;

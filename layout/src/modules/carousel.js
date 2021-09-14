@@ -31,6 +31,7 @@ class Carousel {
         }
         this.addGloClass();
         this.addStyle();
+        this.slides[this.options.position].classList.add('active');
 
         if (this.prev && this.next) {
             this.controlSlider();
@@ -41,8 +42,9 @@ class Carousel {
         if(this.options.position === 0 && this.hideArrow){
             this.prev.style.display = "none";
         }
-        if (this.responsive)
+        if (this.responsive.length > 0){
             this.responseInit();
+        }
     }
 
     addStyle() {
@@ -51,42 +53,42 @@ class Carousel {
             style = document.createElement('style');
             style.id = 'sliderCarusel-style';
         }
-        style.textContent = `
-            .glo-slider {
-                overflow: hidden !important;
-            }
-            .glo-slider__wrap {
-                display: flex !important;
-                transition: transform 0.5s !important;
-                will-change: transform !important;
-            }
-            .glo-slider__item{
-                display: flex !important;
-                align-items: center;
-                justify-content: center;
-                flex: 0 0 ${this.options.widthSlide}% !important;
-                margin: auto 0 !important;
-            }
-            .glo-slider__prev,
-            .glo-slider__next{
-                margin: 0 10px;
-                border: 20px solid transparent;
-                background: transparent;
-            }
-            .glo-slider__next{
-                border-left-color: #19b5fe;
-            }
-            .glo-slider__prev{
-                border-right-color: #19b5fe;
-            }
-            .glo-slider__prev:hover,
-            .glo-slider__next:hover,
-            .glo-slider__prev:focus,
-            .glo-slider__next:focus{
-                background: transparent;
-                outline: transparent;
-            }
-        `;
+            style.textContent = `
+                .glo-slider {
+                    overflow: hidden !important;
+                }
+                .glo-slider__wrap {
+                    display: flex !important;
+                    transition: transform 0.5s !important;
+                    will-change: transform !important;
+                }
+                .glo-slider__item{
+                    display: flex !important;
+                    align-items: center;
+                    justify-content: center;
+                    flex: 0 0 ${this.options.widthSlide}% !important;
+                    margin: auto 0 !important;
+                }
+                .glo-slider__prev,
+                .glo-slider__next{
+                    margin: 0 10px;
+                    border: 20px solid transparent;
+                    background: transparent;
+                }
+                .glo-slider__next{
+                    border-left-color: #19b5fe;
+                }
+                .glo-slider__prev{
+                    border-right-color: #19b5fe;
+                }
+                .glo-slider__prev:hover,
+                .glo-slider__next:hover,
+                .glo-slider__prev:focus,
+                .glo-slider__next:focus{
+                    background: transparent;
+                    outline: transparent;
+                }
+            `;
         document.head.appendChild(style);
     }
 
@@ -97,7 +99,9 @@ class Carousel {
     prevSlider() {
         if (this.options.infinity || this.options.position > 0) {
             this.next.style.display = "flex";
+            this.slides[this.options.position].classList.remove('active');
             this.options.position--;
+            this.slides[this.options.position].classList.add('active');
             if (this.options.infinity && this.options.position < 0) {
                 this.options.position = this.options.maxPosition;
             }
@@ -110,7 +114,9 @@ class Carousel {
     nextSlider() {
         if (this.options.infinity || this.options.position < this.options.maxPosition) {
             this.prev.style.display = "flex";
+            this.slides[this.options.position].classList.remove('active');
             this.options.position++;
+            this.slides[this.options.position].classList.add('active');
             if (this.options.infinity && this.options.position > this.options.maxPosition) {
                 this.options.position = 0;
             }
@@ -150,7 +156,6 @@ class Carousel {
                 this.slidesToShow = slidesToShowDefault;
                 this.options.widthSlide = Math.floor(100 / this.slidesToShow);
                 this.addStyle();
-
             }
         };
         checkResponse();

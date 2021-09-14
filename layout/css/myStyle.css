@@ -115,3 +115,8 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.slider-arrow_left-formula,
+.slider-arrow_right-formula {
+  top: 90%;
+}

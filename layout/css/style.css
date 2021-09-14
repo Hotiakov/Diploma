@@ -1091,7 +1091,6 @@ template, [hidden] {
 }
 
 .formula-slider {
-    min-height: 400px;
     margin-top: 102px;
 }
 
@@ -1108,6 +1107,9 @@ template, [hidden] {
     margin-right: auto;
     opacity: 0.4;
     font-size: 18px;
+}
+.formula-slider__slide.active{
+    opacity: 1;
 }
 
 .formula-slider__slide:before {
