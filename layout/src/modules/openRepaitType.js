@@ -1,8 +1,7 @@
 const openRepaitType = () => {
     const popup = document.querySelector('.popup-repair-types'),
         links = document.querySelectorAll('.link-list'),
-        menu = document.querySelector(".popup-dialog-menu"),
-        closeBtn = popup.querySelector('.close');
+        menu = document.querySelector(".popup-dialog-menu");
 
     links.forEach(link => {
         link.addEventListener('click', e => {
