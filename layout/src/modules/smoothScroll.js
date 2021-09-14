@@ -3,7 +3,7 @@ const smoothScroll = () =>{
         footerBtn = document.querySelector('.button-footer'),
         menu = document.querySelector('.popup-dialog-menu');
     popupNav.addEventListener('click', function(e) {
-        if(!e.target.classList.contains('menu-link')){
+        if(!e.target.classList.contains('menu-link') || e.target.classList.contains('no-overflow')){
             return;
         }
         e.preventDefault();

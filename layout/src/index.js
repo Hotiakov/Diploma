@@ -10,6 +10,7 @@ import popupClose from './modules/popupClose';
 import openConsultPopup from './modules/consultation';
 
 import makeRequest from './modules/makeRequest';
+import repairTabs from './modules/repairTabs';
 
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
@@ -33,4 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     popupClose();
     //Открытие окна Консультации
     openConsultPopup();
+    //Подгрузка данных и установка табов в repair-tabs
+    repairTabs(); 
 });

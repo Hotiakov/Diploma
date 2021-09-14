@@ -5,7 +5,6 @@ const openRepaitType = () => {
 
     links.forEach(link => {
         link.addEventListener('click', e => {
-            console.log(e.target);
             menu.classList.remove('active');
             document.querySelector('.popup-menu').style.visibility = "hidden";
             popup.style.visibility = "inherit";

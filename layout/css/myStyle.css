@@ -10,3 +10,10 @@
 .formula-item-popup.reverse::before {
   transform: rotate(180deg);
 }
+
+.popup-repair-types-content-table__list{
+  display: none;
+}
+.popup-repair-types-content-table__list.active{
+  display: block;
+}
