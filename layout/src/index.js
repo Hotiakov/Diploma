@@ -12,7 +12,7 @@ import openConsultPopup from './modules/consultation';
 import makeRequest from './modules/makeRequest';
 import repairTabs from './modules/repairTabs';
 import sendForm from './modules/sendForm';
-
+import Carousel from './modules/carousel';
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
     //выпадающее меню телефона
