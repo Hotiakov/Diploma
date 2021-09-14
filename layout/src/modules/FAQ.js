@@ -2,7 +2,6 @@ const accordion = () => {
     const accord = document.querySelector('.accordion');
 
     accord.addEventListener('click', e =>{
-        console.log(e.target);
         const target = e.target.closest(".title_block");
         if(!target){
             return;

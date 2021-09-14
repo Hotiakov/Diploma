@@ -8,6 +8,7 @@ const smoothScroll = () =>{
         }
         e.preventDefault();
         menu.classList.remove('active');
+        menu.closest(".popup").style.visibility = "hidden";
         let href = e.target.getAttribute('href').substring(1);
         const scrollTarget = document.getElementById(href);
         const topOffset = 0; // если не нужен отступ сверху 
