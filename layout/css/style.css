@@ -7154,12 +7154,15 @@ div.wave-block:nth-child(17):after {
 
 .nav-popup-repair-types {
     position: relative;
+    width: 90%;
+    margin: 0 auto;
     margin-top: 0 !important;
 }
 
 @media (min-width: 1025px) {
     .nav-popup-repair-types {
         height: 545px;
+        width: 100%;
         background: #F8F4EF;
         overflow-y: scroll;
     }
@@ -7196,25 +7199,16 @@ div.wave-block:nth-child(17):after {
 }
 
 .nav-list-repair {
-    min-width: 390px;
+    min-width: auto;
     display: block;
 }
 
 @media (max-width: 1024px) {
     .nav-list-repair {
-        min-width: 1200px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
         max-width: 100%;
-    }
-}
-
-@media (max-width: 575px) {
-    .nav-list-repair {
-        min-width: 1086px;
     }
 }
 
@@ -7513,7 +7507,7 @@ div.wave-block:nth-child(17):after {
 
 .close {
     position: absolute;
-    top: 47px;
+    top: 27px;
     right: 34px;
     font-size: 38px;
     font-weight: 200;
@@ -7633,8 +7627,10 @@ div.wave-block:nth-child(17):after {
 
 .button_o svg {
     position: absolute;
+    max-width: 100%;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: -1;
 }
 
@@ -7963,13 +7959,13 @@ div.wave-block:nth-child(17):after {
     color: #ffffff;
 }
 
-.active svg path {
+.actives svg path {
     -webkit-transition: 0.5s;
     transition: 0.5s;
     stroke: #F48922;
 }
 
-.active:hover svg path {
+.actives:hover svg path {
     stroke: #F48922;
 }
 

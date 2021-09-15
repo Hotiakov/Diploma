@@ -41,6 +41,12 @@ class Carousel {
             return;
         }
         this.addGloClass();
+        if (this.prev && this.next) {
+            this.controlSlider();
+        } else {
+            this.addArrow();
+            this.controlSlider();
+        }
         this.addStyle();
         this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
         if(this.centered){
@@ -51,12 +57,7 @@ class Carousel {
             this.options.minPosition =  0;
         }
         this.wrap.style.transform = `translateX(${-this.options.position * this.options.widthSlide}%)`;
-        if (this.prev && this.next) {
-            this.controlSlider();
-        } else {
-            this.addArrow();
-            this.controlSlider();
-        }
+        
         if(this.options.position === this.options.minPosition && this.hideArrow){
             this.prev.style.display = "none !important";
         }
@@ -78,6 +79,10 @@ class Carousel {
         this.options.position = this.options.minPosition;
         this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
         this.wrap.style.transform = `translateX(${-this.options.position * this.options.widthSlide}%)`;
+        if(!this.notSlider){
+            this.prev.style.display = "flex";
+            this.next.style.display = "flex";
+        }
         if(this.options.position === this.options.minPosition && this.hideArrow){
             this.prev.style.display = "none";
             this.next.style.display = "flex";
@@ -96,12 +101,15 @@ class Carousel {
         }
         if(this.notSlider){
             style.textContent = '';
+            this.prev.style.display = "none";
+            this.next.style.display = "none";
         } else{
             style.textContent = `
                 ${this.className}.glo-slider {
                     overflow: hidden !important;
                 }
                 ${this.className} .glo-slider__wrap {
+                    flex-wrap: nowrap;
                     display: flex !important;
                     transition: transform 0.5s !important;
                     will-change: transform !important;
@@ -146,10 +154,11 @@ class Carousel {
             this.next.style.display = "flex";
             this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.remove('active');
             this.options.position--;
-            this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
             if (this.options.infinity && this.options.position < this.options.minPosition) {
                 this.options.position = this.options.maxPosition;
             }
+            this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
+            
             this.wrap.style.transform = `translateX(${-this.options.position * this.options.widthSlide}%)`;
         }
         if(this.hideArrow && this.options.position === this.options.minPosition){
@@ -164,10 +173,10 @@ class Carousel {
             this.prev.style.display = "flex";
             this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.remove('active');
             this.options.position++;
-            this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
             if (this.options.infinity && this.options.position > this.options.maxPosition) {
                 this.options.position = this.options.minPosition;
             }
+            this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
             this.wrap.style.transform = `translateX(${-this.options.position * this.options.widthSlide}%)`;
         }
         if(this.hideArrow && this.options.position === this.options.maxPosition){
@@ -196,7 +205,7 @@ class Carousel {
         const maxResponse = Math.max(...allRespone);
         const checkResponse = () => {
             const widthWindow = document.documentElement.clientWidth;
-            if (widthWindow < maxResponse) {
+            if (widthWindow <= maxResponse) {
                 for (let i = 0; i < allRespone.length; i++) {
                     if (widthWindow < allRespone[i]) {
                         this.slidesToShow = this.responsive[i].slidesToShow;

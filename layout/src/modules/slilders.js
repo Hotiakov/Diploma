@@ -33,7 +33,7 @@ const addSliders = () => {
     formula.init();
 
     const repair = new Carousel({
-        main: ".nav-wrap-repair",
+        main: ".nav-wrap-repair-slider",
         wrap: ".nav-list-popup-repair",
         prev: "#nav-arrow-popup-repair_left",
         next: "#nav-arrow-popup-repair_right",
@@ -51,6 +51,34 @@ const addSliders = () => {
         ]
     });
     repair.init();
+    const repairBase = new Carousel({
+        main: ".nav-wrap-repair-simple",
+        wrap: ".nav-list-repair",
+        hideArrow: true,
+        id: "repair-style-base",
+        notSlider: true,
+        slidesToShow: 3,
+        next: '#nav-arrow-repair-right_base',
+        prev: '#nav-arrow-repair-left_base',
+        responsive: [
+            {
+                breakpoint: 1024,
+                slidesToShow: 3,
+                notSlider: false,
+            },
+            {
+                breakpoint: 768,
+                slidesToShow: 2,
+                notSlider: false,
+            },
+            {
+                breakpoint: 569,
+                slidesToShow: 1,
+                notSlider: false,
+            }
+        ]
+    });
+    repairBase.init();
 
     const servises = new Carousel({
         main: ".services-slider__wrapper",
@@ -68,6 +96,26 @@ const addSliders = () => {
         ]
     });
     servises.init();
+
+    const transparency = new Carousel({
+        main: ".transparency-slider-wrap",
+        wrap: ".transparency-slider",
+        prev: "#transparency-arrow_left",
+        next: "#transparency-arrow_right",
+        id: "transparency-style",
+        notSlider: true,
+        slidesToShow: 1,
+        infinity: true,
+        responsive: [
+            {
+                breakpoint: 1090,
+                slidesToShow: 1,
+                notSlider: false,
+                infinity: true,
+            }
+        ]
+    });
+    transparency.init();
 };
 
 export default addSliders;

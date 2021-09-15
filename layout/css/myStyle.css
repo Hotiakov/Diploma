@@ -120,6 +120,23 @@
 .slider-arrow_right-formula {
   /* top: 90%; */
 }
+#nav-arrow-popup-repair_left{
+  left: 30px;
+}
+#nav-arrow-popup-repair_right{
+  right: 30px;
+}
+
+@media(max-width: 568px){
+  #nav-arrow-popup-repair_left {
+    left: 5px;
+  }
+
+  #nav-arrow-popup-repair_right {
+    right: 5px;
+  }
+}
+
 
 
 .active .formula-item-popup {
