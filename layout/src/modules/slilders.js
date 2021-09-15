@@ -51,6 +51,23 @@ const addSliders = () => {
         ]
     });
     repair.init();
+
+    const servises = new Carousel({
+        main: ".services-slider__wrapper",
+        wrap: ".services-slider",
+        slidesToShow: 1,
+        id: "services-style",
+        notSlider: true,
+        hideArrow: true,
+        responsive: [
+            {
+                breakpoint: 576,
+                slidesToShow: 1,
+                notSlider: false,
+            }
+        ]
+    });
+    servises.init();
 };
 
 export default addSliders;
