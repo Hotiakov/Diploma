@@ -1,8 +1,5 @@
 import makeRequest from './makeRequest';
 
-
-
-
 const repairTabs = async () => {
     let data;
     const listOfTables = {};

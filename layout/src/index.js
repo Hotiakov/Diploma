@@ -13,6 +13,7 @@ import makeRequest from './modules/makeRequest';
 import repairTabs from './modules/repairTabs';
 import sendForm from './modules/sendForm';
 import addSliders from './modules/slilders';
+import repairTypes from './modules/repairTypes';
 document.addEventListener('DOMContentLoaded', async () => {
     "use strict";
     //выпадающее меню телефона
@@ -41,4 +42,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     sendForm();
     //Добавляем слайдеры
     addSliders();
+    //переключатель табов "виды ремонтных работы"
+    repairTypes();
 });

@@ -147,3 +147,11 @@
 .formula-slider{
   align-items: flex-start;
 }
+
+.types-repair{
+  display: none;
+}
+
+.types-repair.active{
+  display: block;
+}
