@@ -1,9 +1,12 @@
 class Carousel {
     constructor({ main, wrap, position = 0, 
-        next, prev, slidesToShow = 3, 
+        next, prev, slidesToShow = 3, id,
         infinity = false, hideArrow = false, 
-        centered = false, responsive = [] }) {
+        centered = false, notSlider = false, responsive = [],
+        needClick = false, 
+        }) {
         this.main = document.querySelector(main);
+        this.className = main;
         this.wrap = document.querySelector(wrap);
         this.next = document.querySelector(next);
         this.prev = document.querySelector(prev);
@@ -11,6 +14,9 @@ class Carousel {
         this.slidesToShow = slidesToShow;
         this.hideArrow = hideArrow;
         this.centered = centered;
+        this.id = id;
+        this.notSlider = notSlider;
+        this.needClick = needClick;
         this.options = {
             position,
             widthSlide: Math.floor(100 / this.slidesToShow),
@@ -76,51 +82,57 @@ class Carousel {
             this.prev.style.display = "none";
             this.next.style.display = "flex";
         }
+        if(this.needClick){
+            this.wrap.querySelector('.active').dispatchEvent(new Event('click', {"bubbles":true}));
+        }
         this.addStyle();
     }
 
     addStyle() {
-        let style = document.getElementById("sliderCarusel-style");
+        let style = document.getElementById(this.id);
         if (!style) {
             style = document.createElement('style');
-            style.id = 'sliderCarusel-style';
+            style.id = this.id;
         }
+        if(this.notSlider){
+            style.textContent = '';
+        } else{
             style.textContent = `
-                .glo-slider {
+                ${this.className} .glo-slider {
                     overflow: hidden !important;
                 }
-                .glo-slider__wrap {
+                ${this.className} .glo-slider__wrap {
                     display: flex !important;
                     transition: transform 0.5s !important;
                     will-change: transform !important;
                 }
-                .glo-slider__item{
+                ${this.className} .glo-slider__item{
                     display: flex !important;
                     align-items: center;
                     justify-content: center;
                     flex: 0 0 ${this.options.widthSlide}% !important;
-                    
                 }
-                .glo-slider__prev,
-                .glo-slider__next{
+                ${this.className} .glo-slider__prev,
+                ${this.className} .glo-slider__next{
                     margin: 0 10px;
                     border: 20px solid transparent;
                     background: transparent;
                 }
-                .glo-slider__next{
+                ${this.className} .glo-slider__next{
                     border-left-color: #19b5fe;
                 }
-                .glo-slider__prev{
+                ${this.className} .glo-slider__prev{
                     border-right-color: #19b5fe;
                 }
-                .glo-slider__prev:hover,
-                .glo-slider__next:hover,
-                .glo-slider__prev:focus,
-                .glo-slider__next:focus{
+                ${this.className} .glo-slider__prev:hover,
+                ${this.className} .glo-slider__next:hover,
+                ${this.className} .glo-slider__prev:focus,
+                ${this.className} .glo-slider__next:focus{
                     background: transparent;
                     outline: transparent;
                 }
             `;
+        }
         document.head.appendChild(style);
     }
 
@@ -142,6 +154,9 @@ class Carousel {
         if(this.hideArrow && this.options.position === this.options.minPosition){
             this.prev.style.display = "none";
         }
+        if(this.needClick){
+            this.wrap.querySelector('.active').dispatchEvent(new Event('click', {"bubbles":true}));
+        }
     }
     nextSlider() {
         if (this.options.infinity || this.options.position < this.options.maxPosition) {
@@ -156,6 +171,9 @@ class Carousel {
         }
         if(this.hideArrow && this.options.position === this.options.maxPosition){
             this.next.style.display = "none";
+        }
+        if(this.needClick){
+            this.wrap.querySelector('.active').dispatchEvent(new Event('click', {"bubbles":true}));
         }
     }
     addArrow() {
@@ -172,6 +190,7 @@ class Carousel {
     responseInit() {
         const slidesToShowDefault = this.slidesToShow;
         const centeredDefault = this.centered;
+        const notSliderDefault = this.notSlider;
         const allRespone = this.responsive.map(item => item.breakpoint);
         const maxResponse = Math.max(...allRespone);
         const checkResponse = () => {
@@ -185,12 +204,16 @@ class Carousel {
                             this.centered = this.responsive[i].centered;
                         if(this.responsive[i].position !== undefined)
                             this.options.position = this.responsive[i].position;
+                        if(this.responsive[i].notSlider !== undefined ){
+                            this.notSlider = this.responsive[i].notSlider;
+                        }
                         this.useResponse();
                     }
                 }
             } else {
                 this.slidesToShow = slidesToShowDefault;
                 this.centered = centeredDefault;
+                this.notSlider = notSliderDefault;
                 this.options.widthSlide = Math.floor(100 / this.slidesToShow);
                 this.useResponse();
             }

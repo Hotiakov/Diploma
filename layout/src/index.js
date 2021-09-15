@@ -13,7 +13,7 @@ import makeRequest from './modules/makeRequest';
 import repairTabs from './modules/repairTabs';
 import sendForm from './modules/sendForm';
 import addSliders from './modules/slilders';
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     "use strict";
     //выпадающее меню телефона
     phoneDropdown();
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Открытие окна Консультации
     openConsultPopup();
     //Подгрузка данных и установка табов в repair-tabs
-    repairTabs(); 
+    await repairTabs(); 
     //Отправка форм
     sendForm();
     //Добавляем слайдеры

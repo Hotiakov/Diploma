@@ -9,6 +9,7 @@ const addSliders = () => {
         prev: "#reviews-arrow_left",
         next: "#reviews-arrow_right",
         slidesToShow: 1,
+        id: "reviews-style",
         hideArrow: true,
     });
     feedback.init();
@@ -19,18 +20,37 @@ const addSliders = () => {
         prev: "#formula-arrow_left",
         next: "#formula-arrow_right",
         hideArrow: true,
-        position: -1,
+        id: "formula-style",
         centered: true,
         responsive: [
             {
                 breakpoint: 768,
                 slidesToShow: 1,
-                position: 0,
                 centered: false,
             },
         ]
     });
     formula.init();
+
+    const repair = new Carousel({
+        main: ".nav-wrap-repair",
+        wrap: ".nav-list-popup-repair",
+        prev: "#nav-arrow-popup-repair_left",
+        next: "#nav-arrow-popup-repair_right",
+        slidesToShow: 1,
+        notSlider: true,
+        hideArrow: true,
+        id: "repair-style",
+        needClick: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                slidesToShow: 1,
+                notSlider: false,
+            }
+        ]
+    });
+    repair.init();
 };
 
 export default addSliders;

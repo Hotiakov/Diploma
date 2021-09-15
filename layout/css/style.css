@@ -7226,22 +7226,10 @@ div.wave-block:nth-child(17):after {
 
 @media (max-width: 1024px) {
     .nav-list-popup-repair {
-        min-width: 3130px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+        min-width: auto;
         max-width: 100%;
     }
 }
-
-@media (max-width: 575px) {
-    .nav-list-popup-repair {
-        min-width: 2840px;
-    }
-}
-
 @media (max-width: 575px) {
     .nav-list-designs {
         min-width: 900px;
