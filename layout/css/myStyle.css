@@ -118,5 +118,15 @@
 
 .slider-arrow_left-formula,
 .slider-arrow_right-formula {
-  top: 90%;
+  /* top: 90%; */
+}
+
+
+.active .formula-item-popup {
+  visibility: inherit;
+  opacity: 1;
+}
+
+.formula-slider{
+  align-items: flex-start;
 }

@@ -1337,6 +1337,8 @@ template, [hidden] {
 
 @media (max-width: 1024px) {
     .formula-item-popup {
+        margin-top: 30px;
+        position: static;
         padding-top: 35px;
         top: 155px;
     }

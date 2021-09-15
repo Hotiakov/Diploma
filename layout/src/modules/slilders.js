@@ -19,19 +19,14 @@ const addSliders = () => {
         prev: "#formula-arrow_left",
         next: "#formula-arrow_right",
         hideArrow: true,
-        position: 1,
+        position: -1,
+        centered: true,
         responsive: [
             {
-                breakpoint: 1024,
-                slidesToShow: 3,
-            },
-            {
                 breakpoint: 768,
-                slidesToShow: 2
-            },
-            {
-                breakpoint: 567,
-                slidesToShow: 1
+                slidesToShow: 1,
+                position: 0,
+                centered: false,
             },
         ]
     });

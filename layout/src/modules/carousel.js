@@ -1,5 +1,8 @@
 class Carousel {
-    constructor({ main, wrap, position = 0, next, prev, slidesToShow = 3, infinity = false, hideArrow = false, responsive = [] }) {
+    constructor({ main, wrap, position = 0, 
+        next, prev, slidesToShow = 3, 
+        infinity = false, hideArrow = false, 
+        centered = false, responsive = [] }) {
         this.main = document.querySelector(main);
         this.wrap = document.querySelector(wrap);
         this.next = document.querySelector(next);
@@ -7,11 +10,13 @@ class Carousel {
         this.slides = this.wrap.children;
         this.slidesToShow = slidesToShow;
         this.hideArrow = hideArrow;
+        this.centered = centered;
         this.options = {
             position,
             widthSlide: Math.floor(100 / this.slidesToShow),
             infinity,
             maxPosition: this.slides.length - this.slidesToShow,
+            minPosition: 0,
         };
         this.responsive = responsive;
     }
@@ -31,20 +36,47 @@ class Carousel {
         }
         this.addGloClass();
         this.addStyle();
-        this.slides[this.options.position].classList.add('active');
-
+        this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
+        if(this.centered){
+            this.options.minPosition = -1;
+            this.options.maxPosition =  this.slides.length - this.slidesToShow + 1;
+        } else{
+            this.options.maxPosition = this.slides.length - this.slidesToShow,
+            this.options.minPosition =  0;
+        }
+        this.wrap.style.transform = `translateX(${-this.options.position * this.options.widthSlide}%)`;
         if (this.prev && this.next) {
             this.controlSlider();
         } else {
             this.addArrow();
             this.controlSlider();
         }
-        if(this.options.position === 0 && this.hideArrow){
+        if(this.options.position === this.options.minPosition && this.hideArrow){
             this.prev.style.display = "none";
         }
         if (this.responsive.length > 0){
             this.responseInit();
         }
+        
+    }
+
+    useResponse() {
+        this.wrap.querySelector('.active').classList.remove('active');
+        if(this.centered){
+            this.options.minPosition = -1;
+            this.options.maxPosition =  this.slides.length - this.slidesToShow + 1;
+        } else{
+            this.options.maxPosition = this.slides.length - this.slidesToShow,
+            this.options.minPosition =  0;
+        }
+        this.options.position = this.options.minPosition;
+        this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
+        this.wrap.style.transform = `translateX(${-this.options.position * this.options.widthSlide}%)`;
+        if(this.options.position === this.options.minPosition && this.hideArrow){
+            this.prev.style.display = "none";
+            this.next.style.display = "flex";
+        }
+        this.addStyle();
     }
 
     addStyle() {
@@ -67,7 +99,7 @@ class Carousel {
                     align-items: center;
                     justify-content: center;
                     flex: 0 0 ${this.options.widthSlide}% !important;
-                    margin: auto 0 !important;
+                    
                 }
                 .glo-slider__prev,
                 .glo-slider__next{
@@ -97,30 +129,30 @@ class Carousel {
         this.next.addEventListener('click', this.nextSlider.bind(this));
     }
     prevSlider() {
-        if (this.options.infinity || this.options.position > 0) {
+        if (this.options.infinity || this.options.position > this.options.minPosition) {
             this.next.style.display = "flex";
-            this.slides[this.options.position].classList.remove('active');
+            this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.remove('active');
             this.options.position--;
-            this.slides[this.options.position].classList.add('active');
-            if (this.options.infinity && this.options.position < 0) {
+            this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
+            if (this.options.infinity && this.options.position < this.options.minPosition) {
                 this.options.position = this.options.maxPosition;
             }
-            this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+            this.wrap.style.transform = `translateX(${-this.options.position * this.options.widthSlide}%)`;
         }
-        if(this.hideArrow && this.options.position === 0){
+        if(this.hideArrow && this.options.position === this.options.minPosition){
             this.prev.style.display = "none";
         }
     }
     nextSlider() {
         if (this.options.infinity || this.options.position < this.options.maxPosition) {
             this.prev.style.display = "flex";
-            this.slides[this.options.position].classList.remove('active');
+            this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.remove('active');
             this.options.position++;
-            this.slides[this.options.position].classList.add('active');
+            this.slides[this.centered ? this.options.position + 1 : this.options.position].classList.add('active');
             if (this.options.infinity && this.options.position > this.options.maxPosition) {
-                this.options.position = 0;
+                this.options.position = this.options.minPosition;
             }
-            this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+            this.wrap.style.transform = `translateX(${-this.options.position * this.options.widthSlide}%)`;
         }
         if(this.hideArrow && this.options.position === this.options.maxPosition){
             this.next.style.display = "none";
@@ -139,9 +171,9 @@ class Carousel {
     }
     responseInit() {
         const slidesToShowDefault = this.slidesToShow;
+        const centeredDefault = this.centered;
         const allRespone = this.responsive.map(item => item.breakpoint);
         const maxResponse = Math.max(...allRespone);
-
         const checkResponse = () => {
             const widthWindow = document.documentElement.clientWidth;
             if (widthWindow < maxResponse) {
@@ -149,13 +181,18 @@ class Carousel {
                     if (widthWindow < allRespone[i]) {
                         this.slidesToShow = this.responsive[i].slidesToShow;
                         this.options.widthSlide = Math.floor(100 / this.slidesToShow);
-                        this.addStyle();
+                        if(this.responsive[i].centered !== undefined)
+                            this.centered = this.responsive[i].centered;
+                        if(this.responsive[i].position !== undefined)
+                            this.options.position = this.responsive[i].position;
+                        this.useResponse();
                     }
                 }
             } else {
                 this.slidesToShow = slidesToShowDefault;
+                this.centered = centeredDefault;
                 this.options.widthSlide = Math.floor(100 / this.slidesToShow);
-                this.addStyle();
+                this.useResponse();
             }
         };
         checkResponse();
