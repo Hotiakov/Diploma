@@ -14,7 +14,7 @@ import repairTabs from './modules/repairTabs';
 import sendForm from './modules/sendForm';
 import addSliders from './modules/slilders';
 import repairTypes from './modules/repairTypes';
-import fancySlider from './modules/fancySlider';
+import activateDocuments from './modules/document';
 
 document.addEventListener('DOMContentLoaded', async () => {
     "use strict";
@@ -46,5 +46,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     addSliders();
     //переключатель табов "виды ремонтных работы"
     repairTypes();
-    //добавление слайдеров с картинками
+    //слайдер-документы
+    activateDocuments();
 });

@@ -170,3 +170,15 @@
   transition: opacity 1s;
   opacity: 1 !important; 
 }
+
+.portfolio-slider-wrapper{
+  border-radius: 20px;
+}
+
+.popup-transparency-slider__slide{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

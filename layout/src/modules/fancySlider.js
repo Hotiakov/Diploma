@@ -26,15 +26,16 @@ class fancySlider{
         this.slides[this.position].classList.remove("fade-active");
         if(this.position++ ===  this.slides.length - 1)
             this.position = 0;
+        console.log(this.position);
         this.slides[this.position].classList.add("fade-active");
         if(this.pagination){
             this.curSlide.textContent = this.position + 1;
         }
     }
 
-    zeroSlider(){
+    zeroSlider(position = 0){
         this.slides[this.position].classList.remove("fade-active");
-        this.position = 0;
+        this.position = position;
         this.slides[this.position].classList.add("fade-active");
         if(this.pagination){
             this.curSlide.textContent = this.position + 1;
@@ -45,13 +46,14 @@ class fancySlider{
     init(){
         const checkBtn = e => {
             if(this.wrap.classList.contains("active")){
-                if(e.target.closest(`.${this.prev.classList[1]}`)){
+                if(e.target.closest(`#${this.prev.id}`)){
                     this.prevSlide();
-                } else if(e.target.closest(`.${this.next.classList[1]}`)){
+                } else if(e.target.closest(`#${this.next.id}`)){
                     this.nextSlide();
                 }
             }
         }
+        this.curSlide.textContent = 1;
         this.main.addEventListener('click', checkBtn);
         this.slides.forEach((slide) => {
             slide.style.opacity = 0;
