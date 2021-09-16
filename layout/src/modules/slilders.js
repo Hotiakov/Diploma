@@ -1,4 +1,5 @@
 import Carousel from './carousel';
+import fancySlider from './fancySlider';
 
 
 const addSliders = () => {

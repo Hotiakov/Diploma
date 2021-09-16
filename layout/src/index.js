@@ -47,5 +47,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     //переключатель табов "виды ремонтных работы"
     repairTypes();
     //добавление слайдеров с картинками
-    fancySlider();
 });
