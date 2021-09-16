@@ -18,7 +18,6 @@
   display: block;
 }
 
-
 .preloader {
   display: none;
   position: fixed;
@@ -150,12 +149,24 @@
 
 .types-repair{
   display: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .types-repair.active{
   display: block;
 }
 
-.portfolio-slider-wrapper{
-  border-radius: 20px;
+.repair-types-slider__slide{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fade-active{
+  transition: opacity 1s;
+  opacity: 1 !important; 
 }

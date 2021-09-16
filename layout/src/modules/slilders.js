@@ -1,5 +1,6 @@
 import Carousel from './carousel';
-// import fancySlider from './fancySlider';
+import fancySlider from './fancySlider';
+
 
 const addSliders = () => {
     //слайдер с отзывами
