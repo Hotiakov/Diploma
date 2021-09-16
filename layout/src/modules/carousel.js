@@ -19,7 +19,7 @@ class Carousel {
         this.needClick = needClick;
         this.options = {
             position,
-            widthSlide: Math.floor(100 / this.slidesToShow),
+            widthSlide: 100 / this.slidesToShow,
             infinity,
             maxPosition: this.slides.length - this.slidesToShow,
             minPosition: 0,
@@ -207,9 +207,9 @@ class Carousel {
             const widthWindow = document.documentElement.clientWidth;
             if (widthWindow <= maxResponse) {
                 for (let i = 0; i < allRespone.length; i++) {
-                    if (widthWindow < allRespone[i]) {
+                    if (widthWindow <= allRespone[i]) {
                         this.slidesToShow = this.responsive[i].slidesToShow;
-                        this.options.widthSlide = Math.floor(100 / this.slidesToShow);
+                        this.options.widthSlide = 100 / this.slidesToShow;
                         if(this.responsive[i].centered !== undefined)
                             this.centered = this.responsive[i].centered;
                         if(this.responsive[i].position !== undefined)
@@ -224,7 +224,7 @@ class Carousel {
                 this.slidesToShow = slidesToShowDefault;
                 this.centered = centeredDefault;
                 this.notSlider = notSliderDefault;
-                this.options.widthSlide = Math.floor(100 / this.slidesToShow);
+                this.options.widthSlide = 100 / this.slidesToShow;
                 this.useResponse();
             }
         };

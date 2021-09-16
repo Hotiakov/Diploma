@@ -155,3 +155,7 @@
 .types-repair.active{
   display: block;
 }
+
+.portfolio-slider-wrapper{
+  border-radius: 20px;
+}

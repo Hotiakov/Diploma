@@ -1,5 +1,5 @@
 import Carousel from './carousel';
-
+// import fancySlider from './fancySlider';
 
 const addSliders = () => {
     //слайдер с отзывами
@@ -44,7 +44,7 @@ const addSliders = () => {
         needClick: true,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1025,
                 slidesToShow: 1,
                 notSlider: false,
             }
@@ -72,10 +72,10 @@ const addSliders = () => {
                 notSlider: false,
             },
             {
-                breakpoint: 569,
+                breakpoint: 575,
                 slidesToShow: 1,
                 notSlider: false,
-            }
+            },
         ]
     });
     repairBase.init();
@@ -89,7 +89,7 @@ const addSliders = () => {
         hideArrow: true,
         responsive: [
             {
-                breakpoint: 576,
+                breakpoint: 575,
                 slidesToShow: 1,
                 notSlider: false,
             }
@@ -116,6 +116,39 @@ const addSliders = () => {
         ]
     });
     transparency.init();
+    const portfolio = new Carousel({
+        main: ".portfolio-slider-wrapper",
+        wrap: ".portfolio-slider",
+        prev: "#portfolio-arrow_left",
+        next: "#portfolio-arrow_right",
+        id: "portfolio-style",
+        notSlider: false,
+        slidesToShow: 3,
+        hideArrow: true,
+        responsive: [
+            {
+                breakpoint: 1025,
+                notSlider: false,
+                slidesToShow: 2,
+            },
+            {
+                breakpoint: 900,
+                notSlider: false,
+                slidesToShow: 1,
+            },
+            {
+                breakpoint: 575,
+                notSlider: true,
+                slidesToShow: 1
+            }
+
+        ],
+    });
+    portfolio.init();
+
+    const fancyRepair = () => {
+
+    }
 };
 
 export default addSliders;
