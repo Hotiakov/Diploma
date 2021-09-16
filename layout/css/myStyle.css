@@ -167,7 +167,7 @@
 }
 
 .fade-active{
-  transition: opacity 1s;
+  transition: opacity 0.5s;
   opacity: 1 !important; 
 }
 
@@ -176,6 +176,14 @@
 }
 
 .popup-transparency-slider__slide{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popup-portfolio-slider__slide{
   position: absolute;
   top: 0;
   left: 0;

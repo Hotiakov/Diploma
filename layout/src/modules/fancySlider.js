@@ -1,7 +1,7 @@
 class fancySlider{
     constructor({
         main, wrap, position = 0,
-        prev, next, pagination,
+        prev, next, pagination, useFunc
     }) {
         this.main = document.querySelector(main);
         this.wrap = document.querySelector(wrap);
@@ -10,6 +10,7 @@ class fancySlider{
         this.prev = document.querySelector(prev);
         this.next = document.querySelector(next);
         this.pagination = this.main.querySelector(pagination);
+        this.useFunc = useFunc;
         this.curSlide = this.pagination.querySelector('.slider-counter-content__current');
     }
     prevSlide(){
@@ -20,6 +21,8 @@ class fancySlider{
         if(this.pagination){
             this.curSlide.textContent = this.position + 1;
         }
+        if(this.useFunc)
+            this.useFunc(this.position);
     }
 
     nextSlide(){
@@ -31,6 +34,8 @@ class fancySlider{
         if(this.pagination){
             this.curSlide.textContent = this.position + 1;
         }
+        if(this.useFunc)
+            this.useFunc(this.position);
     }
 
     zeroSlider(position = 0){
@@ -41,6 +46,8 @@ class fancySlider{
             this.curSlide.textContent = this.position + 1;
         }
         this.pagination.querySelector('.slider-counter-content__total').textContent = this.slides.length;
+        if(this.useFunc)
+            this.useFunc(this.position);
     }
     
     init(){

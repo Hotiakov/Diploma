@@ -15,7 +15,7 @@ import sendForm from './modules/sendForm';
 import addSliders from './modules/slilders';
 import repairTypes from './modules/repairTypes';
 import activateDocuments from './modules/document';
-
+import addPortfolio from './modules/portfolio';
 document.addEventListener('DOMContentLoaded', async () => {
     "use strict";
     //выпадающее меню телефона
@@ -48,4 +48,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     repairTypes();
     //слайдер-документы
     activateDocuments();
+    //слайдер-портфолио
+    addPortfolio();
 });
