@@ -11,12 +11,26 @@
 	<main class="main">
 		<div id="container" class="container">
 			<h1 class="title-page">Список услуг</h1>
+			
 			<label>
 				<select name="typeItem" id="typeItem">
 					<option value="Все услуги">Все услуги</option>
 				</select>
 				выбрать тип
 			</label>
+			<!-- <label>
+				<select name="typeSearch" id="typeItem">
+					<option value="id">ID</option>
+					<option value="name">Виды работ</option>
+					<option value="units">Единицы измерения</option>
+					<option value="cost">Цена за единицу</option>
+				</select>
+				Выберите тип фильтра для поиска
+			</label> -->
+			<label>
+				<input type="text" id="search" class="search_input" placeholder="search">
+			</label>
+			
 			<div class="table__wrapper">
 				<table id="table" class="table">
 					<thead>
@@ -29,7 +43,8 @@
 						</th>
 						<th class="table-th th-units">Еденицы измерения<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
 						</th>
-						<th class="table-th th-cost">Цена за единицу</th>
+						<th class="table-th th-cost">Цена за единицу<span class="svg_ui"><svg class="icon-sort"><use xlink:href="./img/sprite.svg#sorting"></use></svg></span>
+						</th>
 						<th class="table-th th-handler">Действия</th>
 					</tr>
 					</thead>

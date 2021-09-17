@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    let data;
+    let data, searchName = '';
 
     const createTable = data => {
         let listOfTypes = new Set();
@@ -89,8 +89,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const update = async () => {
         data = await makeRequest("GET", "http://localhost:3000/api/items")
             .then(resp => resp.json())
-            .catch(err => console.error(err));
-    
+            .catch(err => console.error(err));  
+        if(searchName !== '' && searchName !== null && searchName !== "null"){
+            const reg = new RegExp(`^${searchName}`, "gi");
+            data = data.filter(item => {
+                for(const field in item){
+                    if(reg.test(item[field]))
+                        return true;
+                }
+                return false;
+            });
+        }
         createTypesList(createTable(data), data);
     };
 
@@ -113,14 +122,15 @@ document.addEventListener('DOMContentLoaded', () => {
         data = data.sort(sortFunc);
         createTable(data);
     };
-
+    
     const addListeners = () => {
         const addBtn = document.querySelector('.btn-addItem'),
             modal = document.getElementById('modal'),
             form = modal.querySelector('form'),
             modalHead = modal.querySelector('.modal__header'),
             tbody = document.getElementById('tbody'),
-            thead = document.querySelector('thead');
+            thead = document.querySelector('thead'),
+            search = document.getElementById('search');
 
         let flagType = "POST",
             dist = "http://localhost:3000/api/items";
@@ -202,6 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 filterBySelect(data, target.classList[1].replace('th-', ''), target.classList.contains('active-reverse'));
             }
         });
+
+        search.addEventListener('keydown', e => {
+            if(e.key === 'Enter')
+                window.location.href = `table.html${search.value ? "?search="+search.value : ''}`;
+        });
     };
 
     const init = async () => {
@@ -209,8 +224,11 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
             return;
         }
-        
+
+        const params = (new URL(document.location)).searchParams;
+        searchName = decodeURI(params.get("search"));
         update();
+
         
         addListeners();
     }
