@@ -11,11 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const makeRequest = (typeOfReq, distination, body) =>{
         if(typeOfReq === "GET"){
-            return fetch(distination, {method: "GET", mode: 'cors'});
-        } else {
-            document.body.classList.add('loaded');
+            return fetch(distination, {method: typeOfReq, mode: 'cors'});
+        } else if (typeOfReq === "DELETE"){
+            return fetch(distination, {method: typeOfReq, mode: 'cors'});
+        }
+        else {
             return fetch(distination, {
-                method: 'POST',
+                method: typeOfReq,
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const createTable = data => {
         let listOfTypes = new Set();
-        const tbody = document.getElementById('table');
+        const tbody = document.getElementById('tbody');
         tbody.textContent = "";
         data.forEach(item => {
             tbody.insertAdjacentHTML('beforeend', `
@@ -81,41 +83,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const update = async () => {
         let data = await makeRequest("GET", "http://localhost:3000/api/items")
-            .then(resp => {
-                return resp.json();
-            })
+            .then(resp => resp.json())
             .catch(err => console.error(err));
     
         createTypesList(createTable(data), data);
-        return data;
     };
 
     const addListeners = () => {
         const addBtn = document.querySelector('.btn-addItem'),
             modal = document.getElementById('modal'),
-            form = modal.querySelector('form');
+            form = modal.querySelector('form'),
+            modalHead = modal.querySelector('.modal__header'),
+            tbody = document.getElementById('tbody');
+
+        let flagType = "POST",
+            dist = "http://localhost:3000/api/items";
+
+        
         addBtn.addEventListener('click', () => {
             modal.style.display = 'flex';
+            flagType = "POST";
+            dist = "http://localhost:3000/api/items";
+            modalHead.textContent = "Добавение новой услуги";
         });
+
         modal.addEventListener('click', e => {
             if(e.target.closest('.button__close') || e.target.closest('.cancel-button') || e.target.matches('.modal__overlay')){
                 modal.querySelector('form').reset();
                 modal.style.display = "none";
             }
         });
+
         form.addEventListener('submit', e => {
             e.preventDefault();
-            console.log(form);
+            e.stopPropagation();
             const formData = new FormData(e.target);
-            console.log(formData);
             const data = JSON.stringify(Object.fromEntries(formData));
-            makeRequest("POST", "http://localhost:3000/api/items", data)
+            makeRequest(flagType, dist, data)
                 .then(update)
                 .then(() => {
                     modal.style.display = "none";
                     form.reset();
                 })
                 .catch(err => console.error(err));
+        });
+
+        tbody.addEventListener('click', async e => {
+            let target = e.target.closest(".action-change");
+            if(target){
+                const inputs = modal.querySelectorAll(".input"),
+                    id = target.closest('.table__row').querySelector('.table__id').textContent;
+                dist = `http://localhost:3000/api/items/${id}`;
+
+                const data = await makeRequest("GET", dist)
+                    .then(resp => resp.json())
+                    .catch(err => console.error(err));
+
+                modal.style.display = 'flex';
+                flagType = "PATCH";
+                modalHead.textContent = "Изменение услуги";
+                inputs.forEach(item => {
+                    item.value = data[item.id];
+                });
+                return;
+            }
+            target = e.target.closest(".action-remove")
+            if(target){
+                const  id = target.closest('.table__row').querySelector('.table__id').textContent;
+                dist = `http://localhost:3000/api/items/${id}`;
+                await makeRequest("DELETE", dist)
+                    .then(resp => {
+                        console.log(1);
+                    })
+                    .catch(err => console.error(err));
+                update();
+            }
         });
     };
 
