@@ -27,9 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    let data;
+
     const createTable = data => {
         let listOfTypes = new Set();
         const tbody = document.getElementById('tbody');
+        tbody.classList.remove("fade-in");
         tbody.textContent = "";
         data.forEach(item => {
             tbody.insertAdjacentHTML('beforeend', `
@@ -55,12 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
 						</td>
 					</tr>
             `);
+            setTimeout(() => tbody.classList.add("fade-in"), 100);
             listOfTypes.add(item.type.trim());
         });
         return listOfTypes;
     }
     const filterByType = (data, type) => {
-        data = data.filter(item => item.type.trim() === type);
+        if(type !== "Все услуги")
+            data = data.filter(item => item.type.trim() === type);
         createTable(data);
     };
 
@@ -82,11 +87,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const update = async () => {
-        let data = await makeRequest("GET", "http://localhost:3000/api/items")
+        data = await makeRequest("GET", "http://localhost:3000/api/items")
             .then(resp => resp.json())
             .catch(err => console.error(err));
     
         createTypesList(createTable(data), data);
+    };
+
+    const filterBySelect = (data, select, sortType) => {
+        let numFlag = false;
+        if(select === "handler") return;
+        if(select === "cost"){
+            numFlag = true;
+        }
+        const sortFunc = (a, b) => {
+            let res;
+            let an = a[select], bn = b[select];
+            if(numFlag){
+                if(typeof a[select] === "string") an = +a[select].replace(/\D+/, '');
+                if(typeof b[select] === "string") bn = +b[select].replace(/\D+/, '');
+            }
+            res = an < bn ? 1 : -1;
+            return sortType ? res : -res;
+        }
+        data = data.sort(sortFunc);
+        createTable(data);
     };
 
     const addListeners = () => {
@@ -94,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
             modal = document.getElementById('modal'),
             form = modal.querySelector('form'),
             modalHead = modal.querySelector('.modal__header'),
-            tbody = document.getElementById('tbody');
+            tbody = document.getElementById('tbody'),
+            thead = document.querySelector('thead');
 
         let flagType = "POST",
             dist = "http://localhost:3000/api/items";
@@ -116,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            e.stopPropagation();
             const formData = new FormData(e.target);
             const data = JSON.stringify(Object.fromEntries(formData));
             makeRequest(flagType, dist, data)
@@ -126,6 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     form.reset();
                 })
                 .catch(err => console.error(err));
+        });
+
+        document.getElementById("cost").addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/[\D]/, '');
         });
 
         tbody.addEventListener('click', async e => {
@@ -152,11 +181,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 const  id = target.closest('.table__row').querySelector('.table__id').textContent;
                 dist = `http://localhost:3000/api/items/${id}`;
                 await makeRequest("DELETE", dist)
-                    .then(resp => {
-                        console.log(1);
-                    })
                     .catch(err => console.error(err));
                 update();
+            }
+        });
+
+        thead.addEventListener('click', e => {
+            const target = e.target.closest('.table-th');
+            if(target){
+                if(target.classList.contains("active")){
+                    target.classList.toggle('active-reverse');
+                } else{
+                    const curActive = thead.querySelector('.active');
+                    if(curActive){
+                        curActive.classList.remove('active');
+                        curActive.classList.remove('active-reverse');
+                    }
+                    target.classList.add('active');
+                }
+                filterBySelect(data, target.classList[1].replace('th-', ''), target.classList.contains('active-reverse'));
             }
         });
     };
