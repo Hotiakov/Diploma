@@ -1,5 +1,6 @@
 .popup-dialog-menu.active {
-  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 
 .formula-item-popup.reverse {
@@ -8,7 +9,9 @@
 }
 
 .formula-item-popup.reverse::before {
-  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 
 .popup-repair-types-content-table__list{
@@ -144,7 +147,9 @@
 }
 
 .formula-slider{
-  align-items: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .types-repair{
@@ -167,6 +172,8 @@
 }
 
 .fade-active{
+  -webkit-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
   transition: opacity 0.5s;
   opacity: 1 !important; 
 }
