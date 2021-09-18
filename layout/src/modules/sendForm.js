@@ -13,6 +13,13 @@ const addNameValidation = input => {
     });
 }
 
+const handleErrors = (response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+
 
 const sendForm = () => {
     const forms = document.querySelectorAll("form"),
@@ -51,6 +58,7 @@ const sendForm = () => {
             const data = {};
                 formData.forEach((value, key) => data[key] = value);
             makeRequest("POST", './server.php', data)
+                .then(handleErrors)
                 .then(() => {
                     document.body.classList.remove('loaded');
                     popupForm.style.visibility = "hidden";

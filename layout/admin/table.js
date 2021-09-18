@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if(typeOfReq === "GET"){
             return fetch(distination, {method: typeOfReq, mode: 'cors'});
         } else if (typeOfReq === "DELETE"){
-            return fetch(distination, {method: typeOfReq, mode: 'cors'});
+            if(confirm("Вы уверены, что хотите удалить этот элемент?"))
+                return fetch(distination, {method: typeOfReq, mode: 'cors'});
+            else
+                return new Promise((res, rej) => {});
         }
         else {
             return fetch(distination, {
@@ -91,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(resp => resp.json())
             .catch(err => console.error(err));  
         if(searchName !== '' && searchName !== null && searchName !== "null"){
-            const reg = new RegExp(`^${searchName}`, "gi");
+            const reg = new RegExp(`${searchName}`, "gi");
             data = data.filter(item => {
                 for(const field in item){
                     if(reg.test(item[field]))
@@ -122,6 +125,16 @@ document.addEventListener('DOMContentLoaded', () => {
         data = data.sort(sortFunc);
         createTable(data);
     };
+
+    const handleErrors = (response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+    const isInt = (n) => {
+        return Number(n) === n && n % 1 === 0;
+    }
     
     const addListeners = () => {
         const addBtn = document.querySelector('.btn-addItem'),
@@ -153,8 +166,22 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', e => {
             e.preventDefault();
             const formData = new FormData(e.target);
+            if(isNaN(parseFloat(formData.get("cost")))){
+                console.warn("Цена в форме должна быть указана в виде числа");
+                return;
+            }
+            let flag = true;
+            form.querySelectorAll('input').forEach(item => {
+                if(item.id !== "cost" && item.value.trim() === ''){
+                    console.warn("Было введено пустое поле");
+                    flag = false;
+                }
+            });
+            if(!flag)
+                return;
             const data = JSON.stringify(Object.fromEntries(formData));
             makeRequest(flagType, dist, data)
+                .then(handleErrors)
                 .then(update)
                 .then(() => {
                     modal.style.display = "none";
