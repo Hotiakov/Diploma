@@ -25,6 +25,15 @@ function phoneMask(selector, masked = '+7 (___) ___-__-__') {
 		if (event.type == "blur" && this.value.length < 5) {
 			this.value = "";
 		}
+		if(event.type == "blur" && this.value.length < 18){
+			this.closest('form').querySelector('[type="submit"]').disabled = true;
+			this.style.border = "2px solid red";
+			this.style.borderRadiuse = "4px";
+		} else{
+			this.closest('form').querySelector('[type="submit"]').disabled = false;
+			this.style.border = "2px solid green";
+			this.style.borderRadius = "4px";
+		}
 
 	}
 

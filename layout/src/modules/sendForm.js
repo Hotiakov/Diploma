@@ -19,11 +19,13 @@ const sendForm = () => {
         popupForm = document.querySelector('.popup-consultation'),
         popupThank = document.querySelector('.popup-thank');
     forms.forEach(form => {
-        const nameInput = form.querySelector("[name='name']");
+        const nameInput = form.querySelector("[name='name']"),
+            phoneInput = form.querySelector('[name="phone"]');
         if(nameInput)
             addNameValidation(nameInput);
         form.addEventListener('submit', e => {
             e.preventDefault();
+            
             const checkbox = form.querySelector('.checkbox__input');
             const checkboxLabel = form.querySelector('.checkbox__label');
             if(!checkbox.checked){
@@ -41,6 +43,11 @@ const sendForm = () => {
             }
             checkboxLabel.style.borderColor = 'green';
             const formData = new FormData(form);
+            for(const key of formData.entries()){
+                if(key[1] === ''){
+                    return;
+                }
+            }
             const data = {};
                 formData.forEach((value, key) => data[key] = value);
             makeRequest("POST", './server.php', data)
@@ -48,7 +55,9 @@ const sendForm = () => {
                     document.body.classList.remove('loaded');
                     popupForm.style.visibility = "hidden";
                     popupThank.style.visibility = "inherit";
+                    phoneInput.style.border = "none";
                     form.reset();
+
                     setTimeout(() => {
                         popupThank.style.visibility = "hidden";
                     }, 4000);
